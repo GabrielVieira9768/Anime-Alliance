@@ -92,18 +92,20 @@ function renderEquippedSlots() {
         if (heroId) {
             const hero = characters[heroId];
             slotsContainer.innerHTML += `
-                <div onclick="unequipHero(${i})" class="w-20 h-20 sm:w-24 sm:h-24 bg-gray-800 rounded-lg border-2 border-white/20 relative cursor-pointer shadow-lg overflow-hidden group">
-                    <div class="absolute inset-0 ${hero.color} opacity-40"></div>
+                <div onclick="showHeroDetails('${heroId}', 'team')" class="w-20 h-20 sm:w-24 sm:h-24 bg-gray-800 rounded-lg border-2 border-white/20 relative cursor-pointer shadow-lg overflow-hidden group hover:scale-105 transition-transform duration-200">
+                    <div class="absolute inset-0 ${hero.color} opacity-40 group-hover:opacity-60 transition-opacity"></div>
                     <img src="${hero.icon}" class="w-full h-full object-cover relative z-10">
-                    <div class="absolute inset-0 z-20 bg-red-600/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <i class="fa-solid fa-xmark text-white text-3xl"></i>
+                    
+                    <!-- Overlay sutil no hover -->
+                    <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors z-20 flex items-center justify-center">
+                        <i class="fa-solid fa-magnifying-glass text-white/0 group-hover:text-white/80 text-lg transition-all transform group-hover:scale-100 scale-50"></i>
                     </div>
                 </div>
             `;
         } else {
             slotsContainer.innerHTML += `
-                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg border-2 border-dashed border-gray-600 flex items-center justify-center bg-gray-800/50">
-                    <i class="fa-solid fa-user-plus text-gray-600 text-2xl"></i>
+                <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-lg border-2 border-dashed border-gray-600 flex items-center justify-center bg-gray-800/50 group hover:border-gray-400 hover:bg-gray-800/70 transition-all">
+                    <i class="fa-solid fa-user-plus text-gray-600 group-hover:text-gray-400 text-2xl transition-colors"></i>
                 </div>
             `;
         }
@@ -111,13 +113,8 @@ function renderEquippedSlots() {
 }
 
 function equipHero(heroId) {
-    if (equippedHeroes.includes(heroId)) {
-        showMessage(`${characters[heroId].name} já está na sua equipe!`, 'warning');
-        return;
-    }
-    
     if (equippedHeroes.length >= 3) {
-        showMessage('Sua equipe já está cheia! (Máximo 3 Unidades)', 'error');
+        showMessage('Sua equipe já está cheia! (Máximo 3 Unidades)', 'warning');
         return;
     }
     
@@ -130,19 +127,22 @@ function equipHero(heroId) {
     showHeroDetails(heroId, 'team');
 }
 
-function unequipHero(index) {
-    const heroId = equippedHeroes[index];
-    const heroName = characters[heroId].name;
+function unequipHeroFromDetails(heroId) {
+    const index = equippedHeroes.indexOf(heroId);
     
-    equippedHeroes.splice(index, 1);
-    renderEquippedSlots();
-    loadTeam();
-    
-    showMessage(`${heroName} foi removido da equipe!`, 'info');
-    
-    const detailsPanel = document.getElementById('painel-detalhes');
-    if (detailsPanel && !detailsPanel.classList.contains('hidden')) {
-        detailsPanel.classList.add('hidden');
+    if (index !== -1) {
+        equippedHeroes.splice(index, 1);
+        renderEquippedSlots();
+        
+        showHeroDetails(heroId, 'team');
+        
+        if (typeof loadTeam === 'function') {
+            loadTeam();
+        }
+        
+        if (typeof showMessage === 'function') {
+            showMessage(`${characters[heroId].name} foi removido da equipe!`, 'error');
+        }
     }
 }
 

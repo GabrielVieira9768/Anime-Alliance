@@ -90,25 +90,6 @@ function showHeroDetails(heroId, context = 'team') {
     detailsPanel.classList.remove('hidden');
 }
 
-function unequipHeroFromDetails(heroId) {
-    const index = equippedHeroes.indexOf(heroId);
-    
-    if (index !== -1) {
-        equippedHeroes.splice(index, 1);
-        renderEquippedSlots();
-        
-        showHeroDetails(heroId, 'team');
-        
-        if (typeof loadTeam === 'function') {
-            loadTeam();
-        }
-        
-        if (typeof showMessage === 'function') {
-            showMessage(`${characters[heroId].name} foi removido da equipe!`, 'info');
-        }
-    }
-}
-
 window.onload = () => {
     loadTeam();
     renderEquippedSlots(); 
