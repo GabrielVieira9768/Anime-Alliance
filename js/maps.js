@@ -10,15 +10,15 @@ const gameMaps = {
             { 
                 id: 1, top: '20%', left: '15%', isBoss: false,
                 enemies: [
-                    { id: 'soldier_1', name: 'Soldado Freeza', hp: 80, speed: 90, image: 'assets/enemies/planet_namek/soldier_1.png' },
-                    { id: 'cui', name: 'Cui', hp: 150, speed: 100, image: 'assets/enemies/planet_namek/cui.png' },
-                    { id: 'soldier_2', name: 'Soldado Freeza', hp: 80, speed: 90, image: 'assets/enemies/planet_namek/soldier_2.png' }
+                    { id: 'soldier_1', name: 'Soldado Freeza', hp: 80, speed: 90, attack:15, image: 'assets/enemies/planet_namek/soldier_1.png' },
+                    { id: 'cui', name: 'Cui', hp: 150, speed: 100, attack:20, image: 'assets/enemies/planet_namek/cui.png' },
+                    { id: 'soldier_2', name: 'Soldado Freeza', hp: 80, speed: 90, attack:15, image: 'assets/enemies/planet_namek/soldier_2.png' }
                 ]
             },
             { id: 2, top: '40%', left: '30%', isBoss: false, 
                 enemies: [
-                    { id: 'dodoria', name: 'Dodoria', hp: 200, speed: 95, image: 'assets/enemies/planet_namek/dodoria.png' },
-                    { id: 'zarbon', name: 'Zarbon', hp: 180, speed: 105, image: 'assets/enemies/planet_namek/zarbon.png' }
+                    { id: 'dodoria', name: 'Dodoria', hp: 200, speed: 95, attack:25, image: 'assets/enemies/planet_namek/dodoria.png' },
+                    { id: 'zarbon', name: 'Zarbon', hp: 180, speed: 105, attack:22, image: 'assets/enemies/planet_namek/zarbon.png' }
                 ] 
             },
             { id: 3, top: '25%', left: '50%', isBoss: false, enemies: [] },
