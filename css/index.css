@@ -1,0 +1,23 @@
+/* css/index.css */
+
+/* Esconde todas as telas por padrão com FORÇA MÁXIMA */
+.tela { 
+    display: none !important; 
+}
+
+/* Só mostra se tiver a classe ativa */
+.tela.ativa { 
+    display: flex !important; 
+    animation: fade-in 0.3s ease-in-out; 
+}
+
+/* Animação suave na troca de tela */
+@keyframes fade-in {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Sombra nos ícones do menu principal */
+.icon-shadow { 
+    filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 0.4)); 
+}
